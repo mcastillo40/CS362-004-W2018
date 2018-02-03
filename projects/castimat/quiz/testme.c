@@ -1,3 +1,11 @@
+/*******************************************
+*
+* Matthew Castillo
+* February 4, 2018
+* Quiz: Random Testing
+*   
+********************************************/
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -5,14 +13,30 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+  const int SIZE = 9;
+  char randomC = ' ';
+  char charArray[] = {'[', '(', '{', ' ', 'a', 'x', '}', ')', ']'};
+  
+  // Get random character from array
+  randomC = charArray[(rand() % SIZE)];
+
+  return randomC;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+  const int SIZE = 6;
+  char stringArray[] = {'r','e','s','e','t', '\0'};
+
+  char *string;
+  string =  malloc(sizeof(char) * (SIZE + 1));
+
+  // Create a random string
+  for (int i = 0; i < SIZE; i++) {
+      string[i] = stringArray[(rand() % SIZE)];
+  }
+    
+  return string;
 }
 
 void testme()
@@ -37,10 +61,7 @@ void testme()
     if (c == '}' && state == 6) state = 7;
     if (c == ')' && state == 7) state = 8;
     if (c == ']' && state == 8) state = 9;
-    if (s[0] == 'r' && s[1] == 'e'
-       && s[2] == 's' && s[3] == 'e'
-       && s[4] == 't' && s[5] == '\0'
-       && state == 9)
+    if (s[0] == 'r' && s[1] == 'e' && s[2] == 's' && s[3] == 'e' && s[4] == 't' && s[5] == '\0' && state == 9)
     {
       printf("error ");
       exit(200);
