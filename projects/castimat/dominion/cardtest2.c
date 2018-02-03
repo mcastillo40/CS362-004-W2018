@@ -93,6 +93,7 @@ int main() {
 
       printf("Copper Count in hand: %d; expected: %d\n", testCopperCount, originalCopperCount); 
       printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
+      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
     }
     else if (n == 1) { // Test if silver is drawn
@@ -156,7 +157,9 @@ int main() {
 
       printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
       printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
+      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
+      
     }
     else if (n == 2) { // Test if gold is drawn
       printf("Testing gold\n");
@@ -219,7 +222,9 @@ int main() {
 
       printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount); 
       printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
+      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
+      
     }
     else { // Test if any treasure were drawn
       printf("Testing All\n");
@@ -302,7 +307,9 @@ int main() {
       printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
       printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount); 
       printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
+      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
+
     }
   }
 

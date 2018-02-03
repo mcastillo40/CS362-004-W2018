@@ -38,18 +38,21 @@ Testing copper
 ADVENTURE CALLED
 Copper Count in hand: 7; expected: 6
 Hand count: 8; expected: 7
+Discard pile = 0, expected = 1
 Deck count: 5; expected: 6
 
 Testing silver
 ADVENTURE CALLED
 Silver Count in hand: 0; expected: 1
 Hand count: 8; expected: 7
+Discard pile = 3, expected = 1
 Deck count: 2; expected: 6
 
 Testing gold
 ADVENTURE CALLED
 Gold Count in hand: 1; expected: 1
 Hand count: 8; expected: 7
+Discard pile = 0, expected = 1
 Deck count: 5; expected: 6
 
 Testing All
@@ -59,16 +62,17 @@ Copper Count in hand: 7; expected: 5
 Silver Count in hand: 0; expected: 1
 Gold Count in hand: 0; expected: 0
 Hand count: 8; expected: 7
+Discard pile = 1, expected = 1
 Deck count: 10; expected: 12
 
 
  >>>>> SUCCESS: Testing complete adventurer <<<<<
 
 File 'cardtest2.c'
-Lines executed:82.17% of 157
+Lines executed:82.61% of 161
 Branches executed:93.10% of 116
 Taken at least once:75.86% of 116
-Calls executed:91.49% of 47
+Calls executed:92.16% of 51
 Creating 'cardtest2.c.gcov'
 
 cardtest3.c:
