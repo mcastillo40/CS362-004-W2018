@@ -23,7 +23,6 @@ int main() {
   int seed = 1000;
   int numPlayers = 2;
   int thisPlayer = 0;
-	struct gameState G, testG;
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 
@@ -34,7 +33,7 @@ int main() {
 
     if (n == 0) { // Test if copper is drawn
       printf("Testing copper\n");
-
+      struct gameState G, testG;
       int temphand[MAX_HAND];
       int cardDrawn;
       int drawntreasure = 0, z = 0;
@@ -42,10 +41,21 @@ int main() {
       // Initialize the game state and player cards
       initializeGame(numPlayers, k, seed, &G);
 
-      // add Copper to deck
-      for (int i = 0; i < 3; i++) {
-        gainCard(copper, &G, 1, thisPlayer);
+      for (int i = 0; i < G.deckCount[0]; i++){
+        if (G.deck[0][i] == silver || G.deck[0][i] == gold || G.deck[0][i] == adventurer)
+          G.deck[0][i] = smithy; 
       }
+
+      for (int i = 0; i < G.handCount[0]; i++) {
+        if (i == 0)
+          G.hand[0][i] = adventurer;
+        else
+          G.hand[0][i] = smithy;
+      }
+
+      // add Copper to deck
+      for (int i = 0; i < 3; i++) 
+        gainCard(copper, &G, 1, thisPlayer);
 
       // Shuffle deck 
       shuffle(0, &G);
@@ -79,32 +89,62 @@ int main() {
       // Play adventurer card for testing
       cardEffect(adventurer, choice1, choice2, choice3, &testG, handpos, &bonus);
 
-      int originalCopperCount = 0, testCopperCount = 0; 
+      int originalTreasureCount = 0, testTreasureCount = 0; 
+      int originalcopperCount = 0, testcopperCount = 0;
+      int originalsilverCount = 0, testsilverCount = 0;
+      int originalgoldCount = 0, testgoldCount = 0;
 
       for (int i = 0; i < testG.handCount[0]; i++) {
+        if (testG.hand[0][i] == copper || testG.hand[0][i] == silver || testG.hand[0][i] == gold )
+          testTreasureCount++;
         if (testG.hand[0][i] == copper)
-          testCopperCount++;
+          testcopperCount++;
+        if (testG.hand[0][i] == silver)
+          testsilverCount++;
+        if (testG.hand[0][i] == gold)
+          testgoldCount++;
       }
 
       for (int i = 0; i < G.handCount[0]; i++) {
+        if (G.hand[0][i] == copper || G.hand[0][i] == silver || G.hand[0][i] == gold)
+          originalTreasureCount++;
         if (G.hand[0][i] == copper)
-          originalCopperCount++;
+          originalcopperCount++;
+        if (G.hand[0][i] == silver)
+          originalsilverCount++;
+        if (G.hand[0][i] == gold)
+          originalgoldCount++;
       }
 
-      printf("Copper Count in hand: %d; expected: %d\n", testCopperCount, originalCopperCount); 
-      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
-      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
+      printf("Treasure Count in hand: %d; expected: %d\n", testTreasureCount, originalTreasureCount); 
+      printf("Copper Count in hand: %d; expected: %d\n", testcopperCount, originalcopperCount); 
+      printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
+      printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount);
+      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0] - 1); 
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
     }
     else if (n == 1) { // Test if silver is drawn
       printf("Testing silver\n");
 
+      struct gameState G, testG;
       int temphand[MAX_HAND];
       int cardDrawn;
       int drawntreasure = 0, z = 0;
 
       // Initialize the game state and player cards
       initializeGame(numPlayers, k, seed, &G);
+
+      for (int i = 0; i < G.deckCount[0]; i++){
+        if (G.deck[0][i] == copper || G.deck[0][i] == gold || G.deck[0][i] == adventurer)
+          G.deck[0][i] = smithy; 
+      }
+
+      for (int i = 0; i < G.handCount[0]; i++) {
+        if (i == 0)
+          G.hand[0][i] = adventurer;
+        else
+          G.hand[0][i] = smithy;
+      }
 
       // add Silver to deck
       for (int i = 0; i < 3; i++) {
@@ -126,7 +166,7 @@ int main() {
         drawCard(0, &G); 
 
         cardDrawn = G.hand[0][G.handCount[0]-1]; //top card of hand is most recently drawn card.
-        
+
         if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold) 
           drawntreasure++;
         else  {
@@ -143,33 +183,63 @@ int main() {
       // Play adventurer card for testing
       cardEffect(adventurer, choice1, choice2, choice3, &testG, handpos, &bonus);
 
-      int originalsilverCount = 0, testsilverCount = 0; 
+      int originalTreasureCount = 0, testTreasureCount = 0; 
+      int originalcopperCount = 0, testcopperCount = 0;
+      int originalsilverCount = 0, testsilverCount = 0;
+      int originalgoldCount = 0, testgoldCount = 0;
 
       for (int i = 0; i < testG.handCount[0]; i++) {
+        if (testG.hand[0][i] == copper || testG.hand[0][i] == silver || testG.hand[0][i] == gold )
+          testTreasureCount++;
+        if (testG.hand[0][i] == copper)
+          testcopperCount++;
         if (testG.hand[0][i] == silver)
           testsilverCount++;
+        if (testG.hand[0][i] == gold)
+          testgoldCount++;
       }
 
       for (int i = 0; i < G.handCount[0]; i++) {
+        if (G.hand[0][i] == copper || G.hand[0][i] == silver || G.hand[0][i] == gold)
+          originalTreasureCount++;
+        if (G.hand[0][i] == copper)
+          originalcopperCount++;
         if (G.hand[0][i] == silver)
           originalsilverCount++;
+        if (G.hand[0][i] == gold)
+          originalgoldCount++;
       }
 
+      printf("Treasure Count in hand: %d; expected: %d\n", testTreasureCount, originalTreasureCount); 
+      printf("Copper Count in hand: %d; expected: %d\n", testcopperCount, originalcopperCount); 
       printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
-      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
-      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
+      printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount);
+      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0] - 1); 
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
       
     }
     else if (n == 2) { // Test if gold is drawn
       printf("Testing gold\n");
 
+      struct gameState G, testG;
       int temphand[MAX_HAND];
       int cardDrawn;
       int drawntreasure = 0, z = 0;
 
       // Initialize the game state and player cards
       initializeGame(numPlayers, k, seed, &G);
+
+      for (int i = 0; i < G.deckCount[0]; i++){
+        if (G.deck[0][i] == copper || G.deck[0][i] == silver || G.deck[0][i] == adventurer)
+          G.deck[0][i] = smithy; 
+      }
+
+      for (int i = 0; i < G.handCount[0]; i++) {
+        if (i == 0)
+          G.hand[0][i] = adventurer;
+        else
+          G.hand[0][i] = smithy;
+      }
 
       // add Gold to deck
       for (int i = 0; i < 3; i++) {
@@ -208,27 +278,45 @@ int main() {
       // Play adventurer card for testing
       cardEffect(adventurer, choice1, choice2, choice3, &testG, handpos, &bonus);
 
-      int originalgoldCount = 0, testgoldCount = 0; 
+      int originalTreasureCount = 0, testTreasureCount = 0; 
+      int originalcopperCount = 0, testcopperCount = 0;
+      int originalsilverCount = 0, testsilverCount = 0;
+      int originalgoldCount = 0, testgoldCount = 0;
 
       for (int i = 0; i < testG.handCount[0]; i++) {
+        if (testG.hand[0][i] == copper || testG.hand[0][i] == silver || testG.hand[0][i] == gold )
+          testTreasureCount++;
+        if (testG.hand[0][i] == copper)
+          testcopperCount++;
+        if (testG.hand[0][i] == silver)
+          testsilverCount++;
         if (testG.hand[0][i] == gold)
           testgoldCount++;
       }
 
       for (int i = 0; i < G.handCount[0]; i++) {
+        if (G.hand[0][i] == copper || G.hand[0][i] == silver || G.hand[0][i] == gold)
+          originalTreasureCount++;
+        if (G.hand[0][i] == copper)
+          originalcopperCount++;
+        if (G.hand[0][i] == silver)
+          originalsilverCount++;
         if (G.hand[0][i] == gold)
           originalgoldCount++;
       }
 
-      printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount); 
-      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
-      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
+      printf("Treasure Count in hand: %d; expected: %d\n", testTreasureCount, originalTreasureCount); 
+      printf("Copper Count in hand: %d; expected: %d\n", testcopperCount, originalcopperCount); 
+      printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
+      printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount);
+      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0] - 1); 
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
       
     }
     else { // Test if any treasure were drawn
       printf("Testing All\n");
 
+      struct gameState G, testG;
       int temphand[MAX_HAND];
       int cardDrawn;
       int drawntreasure = 0, z = 0;
@@ -306,8 +394,7 @@ int main() {
       printf("Copper Count in hand: %d; expected: %d\n", testcopperCount, originalcopperCount); 
       printf("Silver Count in hand: %d; expected: %d\n", testsilverCount, originalsilverCount); 
       printf("Gold Count in hand: %d; expected: %d\n", testgoldCount, originalgoldCount); 
-      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0]); 
-      printf("Discard pile = %d, expected = %d\n", testG.discardCount[0], G.discardCount[0] + 1);
+      printf("Hand count: %d; expected: %d\n", testG.handCount[0], G.handCount[0] - 1); 
       printf("Deck count: %d; expected: %d\n\n", testG.deckCount[0], G.deckCount[0]); 
 
     }
