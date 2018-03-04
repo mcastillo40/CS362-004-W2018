@@ -651,6 +651,7 @@ int getCost(int cardNumber)
 
 int adventurerCard(int drawntreasure, struct gameState *state, int currentPlayer)
 {
+    printf("TEST NEW ADVENTURER\n");
       int z = 0; //temphand counter
       int temphand[MAX_HAND];
       int cardDrawn;
@@ -691,7 +692,7 @@ int adventurerCard(int drawntreasure, struct gameState *state, int currentPlayer
 int smithyCard(int currentPlayer, struct gameState *state, int handPos)
 {
 	int i;
-
+  printf("TEST NEW SMITHY\n");
 	//+3 Cards
 	//for (i = 0; i < 3; i++)
 	for (i = 0; i < 5; i++) // ADDS 5 cards instead for a bug
@@ -752,6 +753,7 @@ int stewardCard(int currentPlayer, struct gameState *state, int handPos,
 
 int councilRoomCard(int currentPlayer, struct gameState *state, int handPos)
 {
+  printf("TEST NEW COUNCIL ROOM\n");
 	int i;
       //+4 Cards
 	for (i = 0; i < 4; i++)
