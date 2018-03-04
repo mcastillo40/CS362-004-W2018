@@ -1,0 +1,88 @@
+*** Bug #1 ***
+
+Unique ID: 
+
+	adventurerEffect()
+
+What is the bug?
+ Symptom and Cause
+ 
+	When the adventurer card is played and the adventurerEffect function is called, the size of the players hand that has played 
+	the card does not reflect the appropriate value, nor does the discard pile reflect the expected size. It seems the 
+	function is not drawing the proper number of cards into the hand or that not all of the cards (treasure cards) are
+	being registered by the funtion as being added to the hand. When running through GDB, a function call to drawCard was 
+	executed at least 3 times, and the minimum should be 2. The counter variable, drawntreasure, was also not properly incrementing
+	for all of the treasure cards. When there werent enough gold or copper cards in the deck or discard pile to satisfy the condition
+	in the while loop, then other player states would be oddly affected but never crash the game itself. When the test was rerun
+	with an assurance that there would be enough copper and gold cards to draw, the other player states werent affected, but the cards
+	drawn would still be wrong. The cause appears to be the conditions in the while loop in adventurerEffect(), and the conditions in 
+	the if statement which increments the drawntreasure counter.
+	
+ 
+How do you make the bug happen (BE SPECIFIC)?
+
+	Both cardtest2.c and randomadventurer.c tests revealed this bug, specifically when the control handcounts are compared to the test handcounts 
+	after the card is played. The bug manifests both when the adventurerEffect() function is called directly, and when the cardEffect() 
+	function is used to access it. The bug manifests regarless of what player uses the card. 
+
+
+What version of the software was this detected on? 
+
+	castimat-assignment-2
+
+
+What is the estimated severity of the bug?
+
+	The Severity seems fairly high. While each player that plays the card will recieve the benefit of the extra cards, so the bug has some game
+	balance stil preserved, the fact that the counter of the while loop doesn't increment for all treasure cards could be game breaking. If there
+	are not enough gold or copper cards in the deck or discard pile, then an infinite loop could possibly result since the condition on the while
+	loop may never be satisfied. 
+
+
+What is the estimated priority of the bug?
+
+	Since the bug may potentially be game breaking, or cause the program to crash, this bug should be corrected as soon as it is possible.
+
+
+	
+
+*** Bug #2 ***
+
+Unique ID (name/number).
+
+	smithyEffect()
+
+	
+What is the bug?
+ Symptom and Cause
+	
+	When the smithy card is played the number of cards in the players hand and deck are not the correct numbers expected from the effect of the card. 
+	The random tests found that the bug exists no matter which player uses the card, and the cards in the deck, hand, and the position in the hand 
+	smithy is played from have no bearing on the bug, as the bug persists through all of these values randomized. Only the player using the card is 
+	affected by the bug, as all other parts of the game state seem to remain intact. When utilizing GDB, the smithyEffect() function makes 5 calls 
+	to the drawCard() function when there should only be 3. The cause of the bug appears to be condition in the for loop that calls the drawCard()
+	function.
+ 
+ 
+How do you make the bug happen (BE SPECIFIC)?
+
+	Both cardtest1.c and randomtestcard1.c found that after a smithy card is played by a player and smithyEffect() is called, both directly and 
+	through cardEffect(), will cause the bug to manifest. The bug is present regardless of which player uses the smithy card, so it can happen
+	at any point during the game when smithy is played by any player.
+
+	
+What version of the software was this detected on?
+
+	castimat-assignment-2
+
+	
+What is the estimated severity of the bug?
+
+	The severity isn't too high. This does not appear to be a game breaking bug or a bug that would crash the program. Since the effect will happen
+	for every player using the smithy card, the balance in the game is somewhat preserved, though the players will get more cards than intended.
+
+	
+What is the estimated priority of the bug?
+
+	The card is not working as intended, so the gameplay is affected. While the priority may not be as high as a game breaking or crashing bug, it should
+	still be corrected faily soon as it does affect gameplay in every
