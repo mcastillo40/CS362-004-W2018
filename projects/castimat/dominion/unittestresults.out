@@ -3,12 +3,11 @@ cardtest1.c:
 ----------------- Testing Card: smithy ----------------
      Draws: 3 card; Actions: +0; Discards (self): 1
 
-SMITHY CALLED
 Current player's state
-Hand count = 9, expected = 8  FAILED
-Deck count = 0, expected = 4
+Hand count = 7, expected = 7  PASSED
+Deck count = 2, expected = 4
 Actions = 1, expected = 1
-Discard pile = 0, expected = 1
+Discard pile = 1, expected = 1
 Coins = 4, expected = 4
 Estate Card = 8, expected = 8
 Duchy Card = 8, expected = 8
@@ -32,79 +31,64 @@ Taken at least once:50.00% of 2
 Calls executed:95.83% of 24
 Creating 'cardtest1.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 cardtest2.c:
 ----------------- Testing Card: adventurer ----------------
 Testing copper
 ADVENTURE CALLED
-Treasure Count in hand: 3; expected: 2
-Copper Count in hand: 3; expected: 2
+Treasure Count in hand: 2; expected: 2
+Copper Count in hand: 2; expected: 2
 Silver Count in hand: 0; expected: 0
 Gold Count in hand: 0; expected: 0
-Hand count: 8; expected: 6
-Deck count: 5; expected: 6
+Hand count: 7; expected: 6
+Deck count: 6; expected: 6
 
 Testing silver
 ADVENTURE CALLED
-Treasure Count in hand: 0; expected: 2
+Treasure Count in hand: 2; expected: 2
 Copper Count in hand: 0; expected: 0
-Silver Count in hand: 0; expected: 2
+Silver Count in hand: 2; expected: 2
 Gold Count in hand: 0; expected: 0
-Hand count: -1; expected: 6
-Deck count: 0; expected: 5
+Hand count: 7; expected: 6
+Deck count: 5; expected: 5
 
 Testing gold
 ADVENTURE CALLED
-Treasure Count in hand: 3; expected: 2
+Treasure Count in hand: 2; expected: 2
 Copper Count in hand: 0; expected: 0
 Silver Count in hand: 0; expected: 0
-Gold Count in hand: 3; expected: 2
-Hand count: 8; expected: 6
-Deck count: 2; expected: 5
+Gold Count in hand: 2; expected: 2
+Hand count: 7; expected: 6
+Deck count: 5; expected: 5
 
 Testing All
 ADVENTURE CALLED
-Treasure Count in hand: 7; expected: 6
-Copper Count in hand: 7; expected: 5
-Silver Count in hand: 0; expected: 1
+Treasure Count in hand: 6; expected: 6
+Copper Count in hand: 5; expected: 5
+Silver Count in hand: 1; expected: 1
 Gold Count in hand: 0; expected: 0
-Hand count: 8; expected: 6
-Deck count: 10; expected: 12
+Hand count: 7; expected: 6
+Deck count: 12; expected: 12
 
 
  >>>>> SUCCESS: Testing complete adventurer <<<<<
 
 File 'cardtest2.c'
-Lines executed:84.48% of 232
-Branches executed:91.51% of 212
-Taken at least once:69.81% of 212
+Lines executed:87.50% of 232
+Branches executed:97.17% of 212
+Taken at least once:75.00% of 212
 Calls executed:92.86% of 56
 Creating 'cardtest2.c.gcov'
-
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
 
 cardtest3.c:
 ----------------- Testing Card: Council Room ----------------
      Draws: 4 card; Actions: +0; Discards (self): 1; Opponent Draws: 1 card
 
-COUNCIL ROOM CALLED
 Current player's state
 Hand count = 8, expected = 9  FAILED
 Deck count = 1, expected = 4
-Buys = 3, expected = 2
+Buys = 2, expected = 2
 Actions = 1, expected = 1
-Discard pile = 0, expected = 1
+Discard pile = 1, expected = 1
 Coins = 4, expected = 4
 Estate Card = 8, expected = 8
 Duchy Card = 8, expected = 8
@@ -114,8 +98,8 @@ Silver Card = 40, expected = 40
 Gold Card = 30, expected = 30
 
 Opponent player's state
-hand count = 2, expected = 1
-Deck count = 8, expected = 9
+hand count = 1, expected = 1
+Deck count = 9, expected = 9
 Discard pile = 0, expected = 0
 Coins = 4, expected = 4
 
@@ -128,23 +112,15 @@ Taken at least once:50.00% of 2
 Calls executed:96.00% of 25
 Creating 'cardtest3.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 cardtest4.c:
 ----------------- Testing Card: village ----------------
      Draws: 1 card; Actions: +2; Discards (self): 1
 
-VILLAGE CALLED
 Current player's state
-Hand count = 7, expected = 6  FAILED
-Deck count = 3, expected = 4
+Hand count = 5, expected = 6  FAILED
+Deck count = 4, expected = 4
 Actions = 3, expected = 3
-Discard pile = 0, expected = 1
+Discard pile = 1, expected = 1
 Coins = 4, expected = 4
 Estate Card = 8, expected = 8
 Duchy Card = 8, expected = 8
@@ -168,13 +144,6 @@ Taken at least once:50.00% of 2
 Calls executed:95.83% of 24
 Creating 'cardtest4.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 unittest1.c:
 Testing gainCard.
 Deck Passed: 2000
@@ -191,13 +160,6 @@ Taken at least once:66.67% of 30
 Calls executed:77.42% of 31
 Creating 'unittest1.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 unittest2.c:
 Testing getCost.
 ALL TESTS OK
@@ -207,13 +169,6 @@ Branches executed:100.00% of 105
 Taken at least once:67.62% of 105
 Calls executed:49.23% of 65
 Creating 'unittest2.c.gcov'
-
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
 
 unittest3.c:
 Testing isGameOver.
@@ -225,13 +180,6 @@ Taken at least once:70.00% of 90
 Calls executed:46.00% of 50
 Creating 'unittest3.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 unittest4.c:
 Testing whoseTurn.
 ALL TESTS OK
@@ -242,18 +190,11 @@ Taken at least once:80.00% of 10
 Calls executed:81.82% of 11
 Creating 'unittest4.c.gcov'
 
-File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
-Creating 'dominion.c.gcov'
-
 Dominion.c coverage
 File 'dominion.c'
-Lines executed:43.19% of 565
-Branches executed:39.28% of 415
-Taken at least once:31.81% of 415
-Calls executed:31.37% of 102
+Lines executed:42.83% of 565
+Branches executed:39.57% of 417
+Taken at least once:31.41% of 417
+Calls executed:27.84% of 97
 Creating 'dominion.c.gcov'
 
