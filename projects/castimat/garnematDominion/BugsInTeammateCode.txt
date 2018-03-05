@@ -1,0 +1,148 @@
+﻿BUG #1
+Title: Smithy Card produces the wrong actions when chosen     
+
+Class: Feature Bug
+
+Date: March 4, 2018          
+Reported By: Matthew Castillo
+
+Product: Dominion   
+Platform: Linux Mint “Sonya”          Version: 18.2
+                 
+  
+Is it reproducible: Yes, every time 
+
+Description
+===========
+The Smithy card was chosen to be played. The user had the card in their hand and then played the card. It produced the wrong number of cards to be added to the player’s hand. Additionally, the discard pile did not increment after the card was played.  
+ 
+
+Steps to Produce/Reproduce
+--------------------------
+The Player will have the card in their hand. They chose to play it or have it take effect which will then produce the incorrect results. 
+
+Expected Results
+----------------
+Player’s hand should be 7 at the end of the turn.
+Player’s discard pile should be 1.
+
+
+Actual Results
+--------------
+Player’s hand was 9.
+Player’s discard pile was 0. 
+
+Workarounds
+-----------
+No workarounds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BUG #2
+Title: Adventurer Card produces the wrong action     
+
+Class: Feature Bug
+
+Date: March 4, 2018          
+Reported By: Matthew Castillo
+
+Product: Dominion   
+Platform: Linux Mint “Sonya”          Version: 18.2
+                 
+  
+Is it reproducible: Yes, every time 
+
+Description
+===========
+The Adventurer card was called to be played by the user from their hand. It inadvertently caused the user to have an extra card in their hand. Deck count was also found to not pass random tests. 
+ 
+
+Steps to Produce/Reproduce
+--------------------------
+The Player will have the card in their hand. They chose to play it or have it take effect which will then produce the incorrect results. 
+
+Expected Results
+----------------
+Player’s hand should be 6 at the end of the turn.
+
+Actual Results
+--------------
+Player’s hand was 7.
+
+Workarounds
+-----------
+No workarounds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BUG #3
+Title: Council Room Card produces the wrong action     
+
+Class: Feature Bug
+
+Date: March 4, 2018          
+Reported By: Matthew Castillo
+
+Product: Dominion   
+Platform: Linux Mint “Sonya”          Version: 18.2
+                 
+  
+Is it reproducible: Yes, every time 
+
+Description
+===========
+The Council Room card is supposed to allow the user to draw 4 cards, +1 buy and discard the card played, then allows opponents to draw 1 card. The number of cards in the player’s hand was incorrect. Discard pile count also failed. 
+ 
+
+Steps to Produce/Reproduce
+--------------------------
+The Player will have the card in their hand. They chose to play it or have it take effect which will then produce the incorrect results. 
+
+Expected Results
+----------------
+Player’s hand should be 9 at the end of the turn.
+Player’s discard pile should be 1.
+
+
+Actual Results
+--------------
+Player’s hand was 8.
+Player’s discard pile was 0. 
+
+Workarounds
+-----------
+No workarounds
