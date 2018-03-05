@@ -653,15 +653,13 @@ int getCost(int cardNumber)
 // This function tests the Adventurer card
 void adventurerEffect(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z) {
   
-  printf("ADVENTURE CALLED\n");
-
-  while( drawntreasure<3 ) { // CHANGED so that user draws 3 treasures rather than 2 
+  while( drawntreasure < 2 ) { 
     if (state->deckCount[currentPlayer] <1){ //if the deck is empty we need to shuffle discard and add to deck
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state); 
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1]; //top card of hand is most recently drawn card.
-    if (cardDrawn == copper || cardDrawn == gold) // CHANGED  if cardDrawn == silver removed
+    if (cardDrawn == copper || cardDrawn == gold || cardDrawn == silver) // CHANGED  if cardDrawn == silver removed
       drawntreasure++;
     else  {
       temphand[z]=cardDrawn;
@@ -679,10 +677,8 @@ void adventurerEffect(int drawntreasure, struct gameState *state, int currentPla
 // This function tests the Smithy card
 void smithyEffect(int i, int currentPlayer, struct gameState *state, int handPos) {
   
-  printf("SMITHY CALLED\n");
-
   //+3 Cards
-  for (i = 0; i < 5; i++) // CHANGED user draws 5 cards instead of 3
+  for (i = 0; i < 3; i++) 
   {
     drawCard(currentPlayer, state);
   }
@@ -694,8 +690,6 @@ void smithyEffect(int i, int currentPlayer, struct gameState *state, int handPos
 // This function tests the Council Room card
 void council_roomEffect(int i, int currentPlayer, struct gameState *state, int handPos) {
 
-  printf("COUNCIL ROOM CALLED\n");
-
   // +4 Cards
   for (i = 0; i < 4; i++)
   {
@@ -703,7 +697,7 @@ void council_roomEffect(int i, int currentPlayer, struct gameState *state, int h
   }
   
   //+1 Buy
-  state->numBuys += 2; // CHANGED User buys 2 instead of 1 card
+  state->numBuys += 1; 
   
   //Each other player draws a card
   for (i = 0; i < state->numPlayers; i++)
@@ -711,7 +705,6 @@ void council_roomEffect(int i, int currentPlayer, struct gameState *state, int h
     if ( i != currentPlayer )
     {
       drawCard(i, state);
-      drawCard(i, state); // CHANGED players get to draw 2 cards instead of 1 
     } 
   }
   
@@ -722,23 +715,18 @@ void council_roomEffect(int i, int currentPlayer, struct gameState *state, int h
 // This function tests the Village card
 void villageEffect(int currentPlayer, struct gameState *state, int handPos) {
 
-  printf("VILLAGE CALLED\n");
-
   //+1 Card
   drawCard(currentPlayer, state);
-  drawCard(currentPlayer, state); // CHANGED user draws 2 cards instead of 1
   
   //+2 Actions
   state->numActions = state->numActions + 2;
   
   //discard played card from hand
-  //discardCard(handPos, currentPlayer, state, 0); // CHANGED user does not discard the card from their hand
+  discardCard(handPos, currentPlayer, state, 0); 
 }
 
 // This function tests the Remodel card 
 int remodelEffect(int i, int j, int currentPlayer, int handPos, struct gameState *state, int choice1, int choice2){
-
-  printf("REMODEL CALLED\n");
 
   j = state->hand[currentPlayer][choice1];  //store card we will trash
 
@@ -1295,6 +1283,9 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
       //add card to played pile
       state->playedCards[state->playedCardCount] = state->hand[currentPlayer][handPos]; 
       state->playedCardCount++;
+
+      // Increment discard pile count
+      state->discardCount[currentPlayer]++;
     }
 	
   //set played card to -1
@@ -1305,11 +1296,13 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
     {
       //reduce number of cards in hand
       state->handCount[currentPlayer]--;
+
     }
   else if ( state->handCount[currentPlayer] == 1 ) //only one card in hand
     {
       //reduce number of cards in hand
       state->handCount[currentPlayer]--;
+
     }
   else 	
     {
@@ -1319,6 +1312,7 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
       state->hand[currentPlayer][state->handCount[currentPlayer] - 1] = -1;
       //reduce number of cards in hand
       state->handCount[currentPlayer]--;
+
     }
 	
   return 0;
