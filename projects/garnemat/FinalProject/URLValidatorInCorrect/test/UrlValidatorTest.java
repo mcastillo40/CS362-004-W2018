@@ -73,15 +73,257 @@ public class UrlValidatorTest extends TestCase {
    
    public void testYourFirstPartition()
    {
-	 //You can use this function to implement your First Partition testing	   
+	   //Test Scheme part of the URL
+	   System.out.println("\n\n\t Testing scheme with default constructor");
+	      	   				
+	   // Test valid default scheme "http, https, ftp"
+	   UrlValidator testVal = new UrlValidator();
+				       
+	   String[] testSchemes = {"http://", "https://", "ftp://", " ", "://", "test//", "://", "http:/"};	
+	   
+	   // Iterates through different schemes; only default schemes should be true
+	   for(int i = 0; i < testSchemes.length; i++){
+		   String testString = testSchemes[i] + "www.google.com";
+		   System.out.println();
+		  switch(i) {
+		   	case 0: 
+		   		// http://www.google.com
+		   		System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+		   		break;
+		   	case 1: 
+		   		// https://www.google.com
+		   		System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+		   		break;
+		   	case 2: 
+		   		// ftp://www.google.com
+		   		System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+		   		break;
+		   	case 3:
+		   		// www.google.com
+		   		System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+				break;
+			case 4:
+				// ://www.google.com
+				System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+				break;
+			case 5:
+				// test//www.google.com
+				System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+				break;
+			case 6:
+				// ://www.google.com
+				System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));	
+				break;
+			case 7:
+				// http:/www.google.com
+				System.out.println((i + 1) + ": " + testString);
+				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));	
+				break;
+		   }
+	   }
 
    }
    
    public void testYourSecondPartition(){
-		 //You can use this function to implement your Second Partition testing	   
+	   //Test Authority part of the URL
+	   System.out.println("\n\t Testing Authority with allowing all schemes");
+	   
+	   // Valid schemes 
+	   String[] defaultSchemes = {"http://"};
+	   
+	   // Test scheme that has been shown to work
+	   UrlValidator testVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+	   
+	   // Authority that we will test 
+	   String[] testAuthority = {"www.google.com", "www.bing.com", "714.com", "0.0.0.0", " ", "abc", "E.T1", ".007"};
+	   
+	   // Iterates through different authorities; 
+	   for(int i = 0; i < testAuthority.length; i++){
+		   String testString = defaultSchemes[0] + testAuthority[i];
+		   System.out.println();
+		   
+		   switch(i) {
+		   	case 0: 
+		   			// Test http://www.google.com
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   	case 1: 
+		   			// Test http://www.bing.com
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   	case 2: 
+		   			// Test http://714.com
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   	case 3:
+		   			// Test http://5.3.4
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 4:
+					// Test http://
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 5:
+					// Test http://abc
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 6:
+					// Test http://E.T1
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 7:
+					// Test http://.007
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   }
+		   System.out.println();
+	   }
 
    }
-   //You need to create more test cases for your Partitions if you need to 
+   
+   public void testYourThirdPartition() {
+	 //Test Port part of the URL
+	   System.out.println("\n\t Testing Port with with allowing all schemes");
+	   
+	   // Valid schemes 
+	   String[] defaultSchemes = {"http://"};
+	   
+	   // Test scheme that has been shown to work
+	   UrlValidator testVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+	   
+	   // Port that we will test 
+	   String[] testPort = {":8000", ":800", ":80", ":0", ": ", ":0.0", ":-8", ":a"};
+	   
+	   // Iterates through different ports; 
+	   for(int i = 0; i < testPort.length; i++){
+		   String testString = defaultSchemes[0] + "www.google.com" + testPort[i];
+		   System.out.println();
+		   
+		   switch(i) {
+		   	case 0: 
+		   			// Test http://www.google.com:8000
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+		   			break;
+		   	case 1: 
+		   			// Test http://www.google.com:800
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   	case 2: 
+		   			// Test http://www.google.com:80
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+		   	case 3:
+		   			// Test http://www.google.com:0
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 4:
+					// Test http://www.google.com:
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 5:
+					// Test http://www.google.com:0.0
+		   			System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 6:
+					// Test http://www.google.com:-8
+			   		System.out.println("Test: " + testString);
+					System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+					break;
+			case 7:
+					// Test http://www.google.com:a
+	   				System.out.println("Test: " + testString);
+	   				System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+	   				break;   
+		   }
+		   System.out.println();
+	   }
+}
+   
+   public void testYourFourthPartition() {
+		 //Test Path part of the URL
+		   System.out.println("\n\t Testing Path with with allowing all schemes");
+		   
+		   // Valid schemes 
+		   String[] defaultSchemes = {"http://"};
+		   
+		   // Test scheme that has been shown to work
+		   UrlValidator testVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+		   
+		   // Port that we will test 
+		   String[] testPath = {"/path1", "/p8", "/$45", "/path1/path2", " ", "/..", "/dsf//sd", "/../"};
+		   
+		   
+		   // Iterates through different paths; 
+		   for(int i = 0; i < testPath.length; i++){
+			   String testString = defaultSchemes[0] + "www.google.com" + testPath[i];
+			   System.out.println();
+			   
+			   switch(i) {
+			   	case 0: 
+			   			// Test http://www.google.com/path1
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+			   	case 1: 
+			   			// Test http://www.google.com/p8
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+			   	case 2: 
+			   			// Test http://www.google.com/$45
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+			   	case 3:
+			   			// Test http://www.google.com/path1/path2
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+				case 4:
+						// Test http://www.google.com 
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: True\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+				case 5:
+						// Test http://www.google.com/..
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+				case 6:
+						// Test http://www.google.com/dsf//sd
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+				case 7:
+						// Test http://www.google.com/../
+			   			System.out.println("Test: " + testString);
+						System.out.print("   Expected: False\n   " + "Result:   " + testVal.isValid(testString));
+						break;
+			   }
+			   System.out.println();
+		   }
+	}
    
    public void testIsValid()
    {
